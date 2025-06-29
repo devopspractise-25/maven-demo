@@ -1,12 +1,16 @@
 <html>
+
 <head>
-<title>Hello World!</title>
+	<title>Hello World!</title>
 </head>
-<body>  
+
+<body>
 	<h1>Hello World!</h1>
 	<p>
 		It is now
-		<%= new java.util.Date() %></p>
+		<%= new java.util.Date() %>
+	</p>
 
 </body>
+
 </html>
