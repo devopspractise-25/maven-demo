@@ -1,16 +1,12 @@
-<html>
+<%@ page import="java.util.Date, java.text.SimpleDateFormat, java.util.TimeZone" %>
+	<html>
 
-<head>
-	<title>Hello World!</title>
-</head>
+	<head>
+		<title>Hello World!</title>
+	</head>
 
-<body>
-	<h1>Hello World!</h1>
-	<p>
-		It is now
-		<%= new java.util.Date() %>
-	</p>
-	<%@ page import="java.util.Date, java.text.SimpleDateFormat, java.util.TimeZone" %>
+	<body>
+		<h1>Hello World!</h1>
 
 		<p>It is now
 			<% Date currentDate=new Date(); SimpleDateFormat sdf=new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
@@ -18,6 +14,6 @@
 				out.print(sdf.format(currentDate)); %>
 		</p>
 
-</body>
+	</body>
 
-</html>
+	</html>
