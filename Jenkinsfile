@@ -1,5 +1,5 @@
 pipeline {
-   agent {label 'Slave1'}
+   agent {label 'ubuntu_1'}
     stages {
         stage('Git Clone') {
             steps {
