@@ -11,14 +11,14 @@
     <distributionManagement>
      <snapshotRepository>
       <id>maven-demo-snapshots</id>
-      <url>http://${env.NEXUSSERVERIP}:8081/repository/maven-demo-snapshots/</url>
+      <url>http://34.174.105.234:8081/repository/maven-demo-snapshots/</url>
     </snapshotRepository>
 
 
       <repository>
         <id>maven-demo</id>
         <name>maven-demo</name>
-	<url>http://${{ secrets.NEXUSSERVERIP }}:8081/repository/maven-demo/</url>
+	<url>http://34.174.105.234:8081/repository/maven-demo/</url>
       </repository>
 
   </distributionManagement>
