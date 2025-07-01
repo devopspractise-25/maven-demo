@@ -8,24 +8,20 @@
         <name>Hello World Web Application</name>
         <description>Simplest possible Java Webapp</description>
 
-        <distributionManagement>
-          <repository>
-            <id>maven-releases</id>
-            <!-- CHANGE HERE by your team Nexus server -->
-            <url>http://34.174.105.234:8081/repository/maven-releases/</url>
-          </repository>
-          <snapshotRepository>
-            <id>maven-snapshots</id>
-            <!-- CHANGE HERE by your team Nexus server -->
-            <url>http://34.174.105.234:8081/repository/maven-releases/</url>
-          </snapshotRepository>
-        </distributionManagement>
+    <distributionManagement>
+     <snapshotRepository>
+      <id>maven-demo-snapshots</id>
+      <url>http://34.174.105.234:8081/repository/maven-demo-snapshots/</url>
+    </snapshotRepository>
 
-        <repository>
-          <id>maven-releases</id>
-          <name>maven-releases</name>
-          <url>http://34.174.105.234:8081/repository/maven-releases/</url>
-        </repository>
+
+      <repository>
+        <id>maven-demo</id>
+        <name>maven-demo</name>
+	<url>http://34.174.105.234:8081/repository/maven-demo/</url>
+      </repository>
+
+  </distributionManagement>
 
         <build>
 		<plugins>
