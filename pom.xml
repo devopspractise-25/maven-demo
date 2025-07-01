@@ -21,11 +21,13 @@
           </snapshotRepository>
         </distributionManagement>
 
-        <repository>
+        <repositories>
+          <repository>
           <id>maven-releases</id>
           <name>maven-releases</name>
           <url>http://34.174.105.234:8081/repository/maven-releases/</url>
-        </repository>
+          </repository>
+        </repositories>
 
         <build>
 		<plugins>
