@@ -9,10 +9,10 @@
         <description>Simplest possible Java Webapp</description>
 
     <distributionManagement>
-     <snapshotRepository>
+     <!-- <snapshotRepository>
       <id>maven-releases</id>
       <url>http://34.174.105.234:8081/repository/maven-releases/</url>
-    </snapshotRepository>
+    </snapshotRepository> -->
 
 
       <repository>
