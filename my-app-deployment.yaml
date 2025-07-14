@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: my-java-app-container # Name of the container within the pod
-        image: 34.174.105.234:8082/hello-world-app:1.1.4 # <--- IMPORTANT: REPLACE WITH YOUR NEXUS IMAGE PATH AND TAG
+        image: 34.174.105.234:8082/repository/docker-demo//hello-world-app:1.1.4 # <--- IMPORTANT: REPLACE WITH YOUR NEXUS IMAGE PATH AND TAG
         ports:
         - containerPort: 8080   # The port your Java application listens on inside the container
