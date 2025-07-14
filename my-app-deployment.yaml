@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-java-app-deployment  # Name of your deployment
+  labels:
+    app: my-java-app            # Label for the deployment
+spec:
+  replicas: 2                   # Number of desired replicas (pods)
+  selector:
+    matchLabels:
+      app: my-java-app          # Selector for pods managed by this deployment (must match pod template labels)
+  template:
+    metadata:
+      labels:
+        app: my-java-app        # Labels for the pods created by this deployment
+    spec:
+      containers:
+      - name: my-java-app-container # Name of the container within the pod
+        image: 34.174.105.234:8082/hello-world-app:1.1.4 # <--- IMPORTANT: REPLACE WITH YOUR NEXUS IMAGE PATH AND TAG
+        ports:
+        - containerPort: 8080   # The port your Java application listens on inside the container
