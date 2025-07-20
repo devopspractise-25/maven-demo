@@ -1,7 +1,7 @@
 // Jenkinsfile
 
 pipeline {
-    agent { label 'agent_ubuntu' } // Or a specific agent if you have labels (e.g., agent { label 'minikube-agent' })
+    agent { label 'ubuntu_1' } // Or a specific agent if you have labels (e.g., agent { label 'minikube-agent' })
 
     environment {
         // --- General Settings ---
