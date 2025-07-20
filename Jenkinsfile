@@ -6,7 +6,7 @@ pipeline {
     environment {
         // --- General Settings ---
         GIT_REPO_URL = 'https://github.com/devopspractise-25/maven-demo.git' // Replace with your GitHub repo URL
-        GIT_CREDENTIAL_ID = 'GitHub_Jenkins' // Jenkins credential ID for GitHub (Username/Password or SSH Key)
+        //GIT_CREDENTIAL_ID = 'GitHub_Jenkins' // Jenkins credential ID for GitHub (Username/Password or SSH Key)
 
         // --- Maven Settings ---
         MAVEN_SETTINGS_XML = 'MyNexusSettings' // Jenkins Config File Provider ID for settings.xml if needed for Nexus auth
