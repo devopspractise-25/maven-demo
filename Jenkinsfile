@@ -12,7 +12,7 @@ pipeline {
         GIT_CREDENTIAL_ID = 'GitHub' // Jenkins credential ID for GitHub (Username/Password or SSH Key)
 
         // --- Maven Settings ---
-        MAVEN_SETTINGS_XML = '6a8c26a2-0584-48f1-9a26-507a9479831a' // Jenkins Config File Provider ID for settings.xml if needed for Nexus auth
+        MAVEN_SETTINGS_XML_ID = '6a8c26a2-0584-48f1-9a26-507a9479831a' // Jenkins Config File Provider ID for settings.xml if needed for Nexus auth
         MAVEN_TOOL_NAME = 'maven' // Replace with your Maven tool name configured in Jenkins Global Tool Configuration
 
         // --- SonarQube Settings ---
@@ -48,7 +48,7 @@ pipeline {
         stage('Maven Build') {
             steps {
                 echo 'Building .jar file with Maven...'
-                withMaven(maven: env.MAVEN_TOOL_NAME, mavenSettingsConfig: env.MAVEN_SETTINGS_XML) { // Use mavenSettingsConfig if you have a custom settings.xml for Nexus
+                withMaven(maven: env.MAVEN_TOOL_NAME, mavenSettingsConfig: env.MAVEN_SETTINGS_XML_ID) { // Use mavenSettingsConfig if you have a custom settings.xml for Nexus
                     sh 'mvn clean install -DskipTests'
                 }
             }
