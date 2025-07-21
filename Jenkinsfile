@@ -36,6 +36,7 @@ pipeline {
     stages {
         stage('Checkout SCM') {
             steps {
+                cleanWs()
                 echo 'Checking out code from GitHub...'
                 git branch: 'main', credentialsId: env.GIT_CREDENTIAL_ID, url: env.GIT_REPO_URL
             }
