@@ -13,7 +13,7 @@ pipeline {
 
         // --- Maven Settings ---
         MAVEN_SETTINGS_XML = 'MyNexusSettings' // Jenkins Config File Provider ID for settings.xml if needed for Nexus auth
-        MAVEN_TOOL_NAME = 'Maven 3.8.8' // Replace with your Maven tool name configured in Jenkins Global Tool Configuration
+        MAVEN_TOOL_NAME = 'maven' // Replace with your Maven tool name configured in Jenkins Global Tool Configuration
 
         // --- SonarQube Settings ---
         SONARQUBE_SERVER_ID = 'sonar' // Name of your SonarQube server configured in Jenkins
