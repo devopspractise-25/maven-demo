@@ -2,6 +2,9 @@
 
 pipeline {
     agent { label 'ubuntu_1' } // Or a specific agent if you have labels (e.g., agent { label 'minikube-agent' })
+    //options {
+        //skipDefaultCheckout(true) // We'll do a custom checkout
+    //}
 
     environment {
         // --- General Settings ---
@@ -34,11 +37,11 @@ pipeline {
     }
 
     stages {
-        stage('Checkout SCM') {
+        stage('Clean and Checkout') {
             steps {
                 cleanWs()
                 echo 'Checking out code from GitHub...'
-                git branch: 'main', credentialsId: env.GIT_CREDENTIAL_ID, url: env.GIT_REPO_URL
+                git branch: 'dev-jenkins', credentialsId: env.GIT_CREDENTIAL_ID, url: env.GIT_REPO_URL
             }
         }
 
