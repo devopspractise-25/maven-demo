@@ -48,7 +48,7 @@ pipeline {
         stage('Maven Build') {
             steps {
                 echo 'Building .jar file with Maven...'
-                withMaven(maven: env.MAVEN_TOOL_NAME, mavenSettingsConfig: env.MAVEN_SETTINGS_XML_ID) { // Use mavenSettingsConfig if you have a custom settings.xml for Nexus
+                //withMaven(maven: env.MAVEN_TOOL_NAME, mavenSettingsConfig: env.MAVEN_SETTINGS_XML_ID) { // Use mavenSettingsConfig if you have a custom settings.xml for Nexus
                     sh 'mvn clean install -DskipTests'
                 }
             }
