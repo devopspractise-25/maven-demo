@@ -17,6 +17,9 @@ pipeline {
 
         // --- SonarQube Settings ---
         SONARQUBE_SERVER_ID = 'sonar' // Name of your SonarQube server configured in Jenkins
+        SONAR_HOST_URL='http://34.60.8.224:9000/'
+        SONAR_TOKEN='Sonar to Jenkins'
+
         // SONAR_PROJECT_KEY = 'your-org_your-project' // Optional: If you want to explicitly define the project key
 
         // --- Nexus Settings ---
@@ -61,7 +64,7 @@ pipeline {
                 // Ensure SonarQube Scanner for Jenkins plugin is installed and configured
                 // The 'withSonarQubeEnv' step injects necessary environment variables
                 withSonarQubeEnv(env.SONARQUBE_SERVER_ID) {
-                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${env.JOB_NAME} -Dsonar.sources=."
+                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.host.url=${env.SONAR_TOKEN} -Dsonar.projectKey=${env.JOB_NAME} -Dsonar.sources=."
                     // Adjust sonar.projectKey as needed, JOB_NAME is a Jenkins built-in var
                 }
             }
