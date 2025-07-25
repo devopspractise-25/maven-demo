@@ -17,7 +17,7 @@ pipeline {
 
         // --- SonarQube Settings ---
         SONARQUBE_SERVER_ID = 'sonar' // Name of your SonarQube server configured in Jenkins
-        SONAR_HOST_URL='http://34.60.8.224:9000/'
+        SONAR_HOST_URL='http://34.60.8.224:9000'
         SONAR_TOKEN='Sonar to Jenkins'
 
         // SONAR_PROJECT_KEY = 'your-org_your-project' // Optional: If you want to explicitly define the project key
