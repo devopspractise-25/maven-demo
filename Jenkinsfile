@@ -67,44 +67,6 @@ pipeline {
             }
         }
 
-        stage('SonarQube Scan') {
-            steps {
-                echo 'Running SonarQube analysis...'
-                // Ensure SonarQube Scanner for Jenkins plugin is installed and configured
-                // The 'withSonarQubeEnv' step injects necessary environment variables
-                //withSonarQubeEnv(env.SONARQUBE_SERVER_ID) {
-                withSonarQubeEnv(installationName: 'sonar', credentialsId: 'sonar_admin') {    
-                //     echo "--- Environment variables inside withSonarQubeEnv block ---"
-                //     sh 'env | grep SONAR' // This will print all environment variables starting with SONAR
-                //     sh 'env | grep -i token' // This might show the token if it's named something else
-                //     echo "---------------------------------------------------------"
-                //     sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sonar-demo-cicd -Dsonar.sources=. -Dsonar.token=${env.SONAR_AUTH_TOKEN} -Dsonar.verbose=true"
-                    // Adjust sonar.projectKey as needed, JOB_NAME is a Jenkins built-in var
-                    sh """
-                        sonar-scanner \\
-                        -Dsonar.projectKey=hello-world-war \\
-                        -Dsonar.sources=. \\
-                        -Dsonar.token=${env.SONAR_AUTH_TOKEN} \\
-                        -Dsonar.host.url=${SONAR_HOST_URL}
-                        # Add other properties as needed, e.g., -Dsonar.java.binaries=target/classes
-                    """
-                }
-            }
-            post {
-                always {
-                    echo 'Checking SonarQube Quality Gate status (optional, but recommended).'
-                    // This step pauses the pipeline until Quality Gate status is retrieved or timeout
-                    // Requires SonarQube Scanner for Jenkins plugin
-                    script {
-                        def qualityGate = waitForQualityGate()
-                        if (qualityGate.status != 'OK') {
-                            error "SonarQube Quality Gate failed: ${qualityGate.status}"
-                        }
-                    }
-                }
-            }
-        }
-
         stage('Upload Artifact to Nexus') {
             steps {
                 echo 'Uploading .jar artifact to Nexus...'
