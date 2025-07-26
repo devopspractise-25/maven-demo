@@ -5,15 +5,15 @@ pipeline {
     //options {
         //skipDefaultCheckout(true) // We'll do a custom checkout
     //}
-    tools {
-    // If you configure SonarScanner CLI in Jenkins Global Tool Configuration
-    // 'sonar-scanner-4.x.y' is the name you gave it in Jenkins.
-    // Replace with 'maven' if you still need Maven for other build steps.
-    // If you install SonarScanner CLI manually, skip this 'tools' block
-    // and use the full path to sonar-scanner.
-    maven 'M3' // Assuming 'M3' is your Maven 3.8.7 installation
-    sonarScanner 'SonarScannerCLI' // Assuming you've set this up
-    }
+    // tools {
+    // // If you configure SonarScanner CLI in Jenkins Global Tool Configuration
+    // // 'sonar-scanner-4.x.y' is the name you gave it in Jenkins.
+    // // Replace with 'maven' if you still need Maven for other build steps.
+    // // If you install SonarScanner CLI manually, skip this 'tools' block
+    // // and use the full path to sonar-scanner.
+    // maven 'Apache Maven 3.8.7' // Assuming 'M3' is your Maven 3.8.7 installation
+    // sonarScanner 'SonarScannerCLI' // Assuming you've set this up
+    // }
 
     environment {
         // --- General Settings ---
