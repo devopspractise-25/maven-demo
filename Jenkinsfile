@@ -5,6 +5,15 @@ pipeline {
     //options {
         //skipDefaultCheckout(true) // We'll do a custom checkout
     //}
+    tools {
+    // If you configure SonarScanner CLI in Jenkins Global Tool Configuration
+    // 'sonar-scanner-4.x.y' is the name you gave it in Jenkins.
+    // Replace with 'maven' if you still need Maven for other build steps.
+    // If you install SonarScanner CLI manually, skip this 'tools' block
+    // and use the full path to sonar-scanner.
+    maven 'M3' // Assuming 'M3' is your Maven 3.8.7 installation
+    sonarScanner 'SonarScannerCLI' // Assuming you've set this up
+    }
 
     environment {
         // --- General Settings ---
@@ -64,12 +73,20 @@ pipeline {
                 // Ensure SonarQube Scanner for Jenkins plugin is installed and configured
                 // The 'withSonarQubeEnv' step injects necessary environment variables
                 withSonarQubeEnv(env.SONARQUBE_SERVER_ID) {
-                    echo "--- Environment variables inside withSonarQubeEnv block ---"
-                    sh 'env | grep SONAR' // This will print all environment variables starting with SONAR
-                    sh 'env | grep -i token' // This might show the token if it's named something else
-                    echo "---------------------------------------------------------"
-                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sonar-demo-cicd -Dsonar.sources=. -Dsonar.token=${env.SONAR_AUTH_TOKEN} -Dsonar.verbose=true"
+                //     echo "--- Environment variables inside withSonarQubeEnv block ---"
+                //     sh 'env | grep SONAR' // This will print all environment variables starting with SONAR
+                //     sh 'env | grep -i token' // This might show the token if it's named something else
+                //     echo "---------------------------------------------------------"
+                //     sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sonar-demo-cicd -Dsonar.sources=. -Dsonar.token=${env.SONAR_AUTH_TOKEN} -Dsonar.verbose=true"
                     // Adjust sonar.projectKey as needed, JOB_NAME is a Jenkins built-in var
+                sh """
+                    sonar-scanner \\
+                    -Dsonar.projectKey=hello-world-war \\
+                    -Dsonar.sources=. \\
+                    -Dsonar.token=${env.SONAR_AUTH_TOKEN} \\
+                    -Dsonar.host.url=${SONAR_HOST_URL}
+                    # Add other properties as needed, e.g., -Dsonar.java.binaries=target/classes
+                """
                 }
             }
             post {
