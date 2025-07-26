@@ -60,18 +60,58 @@ pipeline {
         stage('Maven Build') {
             steps {
                 echo 'Building .jar file with Maven...'
-                sh 'mvn clean install -DskipTests'
+                
                 //withMaven(maven: env.MAVEN_TOOL_NAME, mavenSettingsConfig: env.MAVEN_SETTINGS_XML_ID) { // Use mavenSettingsConfig if you have a custom settings.xml for Nexus
-                    
+                withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '6a8c26a2-0584-48f1-9a26-507a9479831a', traceability: true) {
+                sh 'mvn clean install -DskipTests'
+                }   
                 //}
             }
         }
 
+        // stage('SonarQube Scan') {
+        //     steps {
+        //         echo 'Running SonarQube analysis...'
+        //         // Ensure SonarQube Scanner for Jenkins plugin is installed and configured
+        //         // The 'withSonarQubeEnv' step injects necessary environment variables
+        //         //withSonarQubeEnv(env.SONARQUBE_SERVER_ID) {
+        //         withSonarQubeEnv(installationName: 'sonar', credentialsId: 'sonar_admin') {    
+        //         //     echo "--- Environment variables inside withSonarQubeEnv block ---"
+        //         //     sh 'env | grep SONAR' // This will print all environment variables starting with SONAR
+        //         //     sh 'env | grep -i token' // This might show the token if it's named something else
+        //         //     echo "---------------------------------------------------------"
+        //         //     sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sonar-demo-cicd -Dsonar.sources=. -Dsonar.token=${env.SONAR_AUTH_TOKEN} -Dsonar.verbose=true"
+        //             // Adjust sonar.projectKey as needed, JOB_NAME is a Jenkins built-in var
+        //             sh """
+        //                 sonar-scanner \\
+        //                 -Dsonar.projectKey=hello-world-war \\
+        //                 -Dsonar.sources=. \\
+        //                 -Dsonar.token=${env.SONAR_AUTH_TOKEN} \\
+        //                 -Dsonar.host.url=${env.SONAR_HOST_URL} \\
+        //                 -Dsonar.java.binaries=target/classes
+        //                 # Add other properties as needed, e.g., -Dsonar.java.binaries=target/classes
+        //             """
+        //         }
+        //     }
+        //     post {
+        //         always {
+        //             echo 'Checking SonarQube Quality Gate status (optional, but recommended).'
+        //             // This step pauses the pipeline until Quality Gate status is retrieved or timeout
+        //             // Requires SonarQube Scanner for Jenkins plugin
+        //             script {
+        //                 def qualityGate = waitForQualityGate()
+        //                 if (qualityGate.status != 'OK') {
+        //                     error "SonarQube Quality Gate failed: ${qualityGate.status}"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
         stage('Upload Artifact to Nexus') {
             steps {
                 echo 'Uploading .jar artifact to Nexus...'
-                //withCredentials([usernamePassword(credentialsId: env.NEXUS_CREDENTIAL_ID, passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
-                withCredentials([usernamePassword(credentialsId: 'nexus-jenkins', passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: env.NEXUS_CREDENTIAL_ID, passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
                     // This uses mvn deploy. Ensure your pom.xml has <distributionManagement> configured
                     // Or you can use -DaltDeploymentRepository as shown below (replace placeholders)
                     sh "mvn deploy -DskipTests -DaltDeploymentRepository=nexus-releases::default::${env.NEXUS_REPO_URL} -DrepositoryId=nexus-releases"
