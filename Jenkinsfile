@@ -68,7 +68,7 @@ pipeline {
                     sh 'env | grep SONAR' // This will print all environment variables starting with SONAR
                     sh 'env | grep -i token' // This might show the token if it's named something else
                     echo "---------------------------------------------------------"
-                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sonar-demo-cicd -Dsonar.sources=. -Dsonar.token=${env.SONAR_AUTH_TOKEN}"
+                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sonar-demo-cicd -Dsonar.sources=. -Dsonar.token=${env.SONAR_AUTH_TOKEN} -Dsonar.verbose=true"
                     // Adjust sonar.projectKey as needed, JOB_NAME is a Jenkins built-in var
                 }
             }
