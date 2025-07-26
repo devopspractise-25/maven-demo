@@ -64,6 +64,10 @@ pipeline {
                 // Ensure SonarQube Scanner for Jenkins plugin is installed and configured
                 // The 'withSonarQubeEnv' step injects necessary environment variables
                 withSonarQubeEnv(env.SONARQUBE_SERVER_ID) {
+                    echo "--- Environment variables inside withSonarQubeEnv block ---"
+                    sh 'env | grep SONAR' // This will print all environment variables starting with SONAR
+                    sh 'env | grep -i token' // This might show the token if it's named something else
+                    echo "---------------------------------------------------------"
                     sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${env.JOB_NAME} -Dsonar.sources=."
                     // Adjust sonar.projectKey as needed, JOB_NAME is a Jenkins built-in var
                 }
