@@ -72,7 +72,8 @@ pipeline {
                 echo 'Running SonarQube analysis...'
                 // Ensure SonarQube Scanner for Jenkins plugin is installed and configured
                 // The 'withSonarQubeEnv' step injects necessary environment variables
-                withSonarQubeEnv(env.SONARQUBE_SERVER_ID) {
+                //withSonarQubeEnv(env.SONARQUBE_SERVER_ID) {
+                withSonarQubeEnv(credentialsId: 'sonar_admin') {    
                 //     echo "--- Environment variables inside withSonarQubeEnv block ---"
                 //     sh 'env | grep SONAR' // This will print all environment variables starting with SONAR
                 //     sh 'env | grep -i token' // This might show the token if it's named something else
