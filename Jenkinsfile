@@ -70,7 +70,8 @@ pipeline {
         stage('Upload Artifact to Nexus') {
             steps {
                 echo 'Uploading .jar artifact to Nexus...'
-                withCredentials([usernamePassword(credentialsId: env.NEXUS_CREDENTIAL_ID, passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
+                //withCredentials([usernamePassword(credentialsId: env.NEXUS_CREDENTIAL_ID, passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'nexus-jenkins', passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
                     // This uses mvn deploy. Ensure your pom.xml has <distributionManagement> configured
                     // Or you can use -DaltDeploymentRepository as shown below (replace placeholders)
                     sh "mvn deploy -DskipTests -DaltDeploymentRepository=nexus-releases::default::${env.NEXUS_REPO_URL} -DrepositoryId=nexus-releases"
