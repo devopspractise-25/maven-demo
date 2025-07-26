@@ -80,14 +80,14 @@ pipeline {
                 //     echo "---------------------------------------------------------"
                 //     sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sonar-demo-cicd -Dsonar.sources=. -Dsonar.token=${env.SONAR_AUTH_TOKEN} -Dsonar.verbose=true"
                     // Adjust sonar.projectKey as needed, JOB_NAME is a Jenkins built-in var
-                sh """
-                    sonar-scanner \\
-                    -Dsonar.projectKey=hello-world-war \\
-                    -Dsonar.sources=. \\
-                    -Dsonar.token=${env.SONAR_AUTH_TOKEN} \\
-                    -Dsonar.host.url=${SONAR_HOST_URL}
-                    # Add other properties as needed, e.g., -Dsonar.java.binaries=target/classes
-                """
+                    sh """
+                        sonar-scanner \\
+                        -Dsonar.projectKey=hello-world-war \\
+                        -Dsonar.sources=. \\
+                        -Dsonar.token=${env.SONAR_AUTH_TOKEN} \\
+                        -Dsonar.host.url=${SONAR_HOST_URL}
+                        # Add other properties as needed, e.g., -Dsonar.java.binaries=target/classes
+                    """
                 }
             }
             post {
