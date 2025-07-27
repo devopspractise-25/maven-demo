@@ -23,6 +23,7 @@ pipeline {
         }
         stage ('SonarQube Scan'){
             steps{
+                echo "SonarQube Scannin started"
                 withSonarQubeEnv(installationName: 'sonar', credentialsId: 'admin-sonar') {
                     sh """
                         sonar-scanner \\
@@ -34,6 +35,12 @@ pipeline {
                         # Add other properties as needed, e.g., -Dsonar.java.binaries=target/classes
                     """
                 }
+            }
+        }
+        stage ('Nexus Upload'){
+            steps{
+                echo "Uploading artifact to nexus repository"
+                nexusArtifactUploader credentialsId: 'nexus-jenkins', groupId: 'com.efsavage', nexusUrl: '34.174.105.234:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: '1.1.4'
             }
         }
     }
