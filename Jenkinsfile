@@ -21,5 +21,20 @@ pipeline {
             } 
             }
         }
+        stage ('SonarQube Scan'){
+            steps{
+                withSonarQubeEnv(installationName: 'sonar' credentialsId: 'admin_sonar') {
+                    sh """
+                        sonar-scanner \\
+                        -Dsonar.projectKey=hello-world-war \\
+                        -Dsonar.sources=. \\
+                        -Dsonar.token=${env.SONAR_AUTH_TOKEN} \\
+                        -Dsonar.host.url=${env.SONAR_HOST_URL} \\
+                        -Dsonar.java.binaries=target/classes
+                        # Add other properties as needed, e.g., -Dsonar.java.binaries=target/classes
+                    """
+                }
+            }
+        }
     }
 }
