@@ -77,6 +77,7 @@ pipeline {
                     }
                 }
             }
+        }
         // stage ('Nexus .war Upload'){
         //     steps{
         //         echo "Uploading artifact to nexus repository"
