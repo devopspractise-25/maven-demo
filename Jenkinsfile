@@ -1,5 +1,11 @@
 pipeline {
     agent {label 'ubuntu_1'}
+    environment{
+        // --- Nexus Settings ---
+        NEXUS_REPO_URL = 'http://34.174.105.234:8081/repository/maven-releases/' // Replace with your Nexus releases repo URL
+        //NEXUS_SNAPSHOT_REPO_URL = 'http://your-nexus-ip:8081/repository/maven-snapshots' // Replace with your Nexus snapshots repo URL
+        NEXUS_CREDENTIAL_ID = 'nexus-jenkins'
+    }
 
     stages {
         stage ('Checkout SCM'){
