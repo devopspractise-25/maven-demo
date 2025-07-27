@@ -83,6 +83,11 @@ pipeline {
                 }
             }
         }
+        stage ('Kubernetes Deploy') {
+            steps {
+                sh kube_deploy.sh
+            }
+        }
         // stage ('Nexus .war Upload'){
         //     steps{
         //         echo "Uploading artifact to nexus repository"
