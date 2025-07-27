@@ -85,8 +85,8 @@ pipeline {
         }
         stage ('Kubernetes Deploy') {
             steps {
-                sh 'chmod +x kube_deploy.sh'
-                sh 'kube_deploy.sh'
+                sh 'chmod +x ./kube_deploy.sh'
+                sh './kube_deploy.sh'
             }
         }
         // stage ('Nexus .war Upload'){
