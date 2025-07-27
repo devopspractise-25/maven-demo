@@ -7,7 +7,7 @@ WORKDIR /usr/local/tomcat/webapps
 # Copy the WAR file from your Jenkins workspace (which we'll download)
 # to the webapps directory in the container.
 # The WAR will be automatically exploded and served by Tomcat at /hello-world
-COPY hello-world-war-1.1.4.war /usr/local/tomcat/webapps/hello-world.war
+COPY target/hello-world-war-1.1.4.war /usr/local/tomcat/webapps/hello-world.war
 
 # Expose port 8080 (Tomcat's default)
 EXPOSE 8080
