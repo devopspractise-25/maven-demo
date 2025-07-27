@@ -8,7 +8,7 @@ pipeline {
 
         // --- Docker Settings ---
         DOCKER_IMAGE_NAME = "devopspractise25/hello-world-app" // e.g., "myuser/my-java-app"
-        DOCKER_REGISTRY_URL = 'http://34.174.105.234:8082/repository/docker-demo' // Or your private registry URL, e.g., 'your-private-registry:5000'
+        DOCKER_REGISTRY_URL = '34.174.105.234:8082/repository/docker-demo' // Or your private registry URL, e.g., 'your-private-registry:5000'
         DOCKER_REGISTRY_CRED_ID = 'docker-server' // Jenkins credential ID for Docker Hub/Registry
         DOCKER_IMAGE_VERSION = '1.1.4'
     }
@@ -63,8 +63,9 @@ pipeline {
             steps {
                 script {
                     // Authenticate with Nexus Docker Registry using Jenkins credentials
-                    echo "pushin"
-                    docker.withRegistry(${DOCKER_REGISTRY_URL}, ${NEXUS_CREDENTIAL_ID}) {
+                    echo "pushing docker image to nexus regsitry"
+                    //docker.withRegistry("http://${DOCKER_REGISTRY_URL}", ${NEXUS_CREDENTIAL_ID}) {
+                    docker.withRegistry("http://${DOCKER_REGISTRY_URL}", 'nexus-jenkins') {
                         // Build the image again (or reference the previously built one if using an 'agent none' for stages)
                         // For simplicity, let's assume agent any, so we rebuild for this stage
                         def customImage = docker.build(DOCKER_IMAGE_NAME, '.')
