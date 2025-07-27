@@ -8,7 +8,7 @@ pipeline {
 
         // --- Docker Settings ---
         DOCKER_IMAGE_NAME = "hello-world-app" // e.g., "myuser/my-java-app"
-        DOCKER_REGISTRY_URL = '34.174.105.234:8082/repository/docker-demo/' // Or your private registry URL, e.g., 'your-private-registry:5000'
+        DOCKER_REGISTRY_URL = '34.174.105.234:8082/repository/docker-demo' // Or your private registry URL, e.g., 'your-private-registry:5000'
         //DOCKER_REGISTRY_CRED_ID = 'docker-server' // Jenkins credential ID for Docker Hub/Registry
         DOCKER_IMAGE_VERSION = '1.1.4'
         DOCKER_IMAGE_FULL_VERSION_TAG = "${DOCKER_REGISTRY_URL}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}"
