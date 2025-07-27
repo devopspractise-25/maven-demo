@@ -75,9 +75,9 @@ pipeline {
                         echo "Pushed Docker image: ${DOCKER_IMAGE_NAME}"
 
                         // Optionally, tag and push as 'latest'
-                        customImage.addTag('latest')
-                        customImage.push('latest')
-                        echo "Also tagged and pushed as: ${DOCKER_IMAGE_VERSION}"
+                        // customImage.addTag('latest')
+                        // customImage.push('latest')
+                        // echo "Also tagged and pushed as: ${DOCKER_IMAGE_VERSION}"
                     }
                 }
             }
