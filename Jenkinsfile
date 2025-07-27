@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'Ubuntu_1'}
+    agent {label 'ubuntu_1'}
 
     stages {
         stage ('Checkout SCM'){
