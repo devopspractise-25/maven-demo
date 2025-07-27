@@ -7,10 +7,11 @@ pipeline {
         NEXUS_CREDENTIAL_ID = 'nexus-jenkins'
 
         // --- Docker Settings ---
-        DOCKER_IMAGE_NAME = "devopspractise25/hello-world-app" // e.g., "myuser/my-java-app"
-        DOCKER_REGISTRY_URL = '34.174.105.234:8082/repository/docker-demo' // Or your private registry URL, e.g., 'your-private-registry:5000'
-        DOCKER_REGISTRY_CRED_ID = 'docker-server' // Jenkins credential ID for Docker Hub/Registry
+        DOCKER_IMAGE_NAME = "docker-demo/docker-demo/hello-world-app" // e.g., "myuser/my-java-app"
+        DOCKER_REGISTRY_URL = '34.174.105.234:8082' // Or your private registry URL, e.g., 'your-private-registry:5000'
+        //DOCKER_REGISTRY_CRED_ID = 'docker-server' // Jenkins credential ID for Docker Hub/Registry
         DOCKER_IMAGE_VERSION = '1.1.4'
+        DOCKER_IMAGE_FULL_VERSION_TAG = "${DOCKER_REGISTRY_URL}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}"
     }
 
     stages {
@@ -54,7 +55,7 @@ pipeline {
             steps {
                 script {
                     sh 'ls -lrth'
-                    def customImage = docker.build(DOCKER_IMAGE_NAME, '.')
+                    def customImage = docker.build(DOCKER_IMAGE_FULL_VERSION_TAG, '.')
                     echo "Built Docker image: ${customImage.id}"
                 }
             }
@@ -68,11 +69,11 @@ pipeline {
                     docker.withRegistry("http://${DOCKER_REGISTRY_URL}", 'nexus-jenkins') {
                         // Build the image again (or reference the previously built one if using an 'agent none' for stages)
                         // For simplicity, let's assume agent any, so we rebuild for this stage
-                        def customImage = docker.build(DOCKER_IMAGE_NAME, '.')
+                        def customImage = docker.build(DOCKER_IMAGE_FULL_VERSION_TAG, '.')
 
                         // Push the uniquely tagged image
                         customImage.push()
-                        echo "Pushed Docker image: ${DOCKER_IMAGE_NAME}"
+                        echo "Pushed Docker image: ${DOCKER_IMAGE_FULL_VERSION_TAG}"
 
                         // Optionally, tag and push as 'latest'
                         // customImage.addTag('latest')
