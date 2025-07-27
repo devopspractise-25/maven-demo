@@ -19,7 +19,8 @@ pipeline {
                 cleanWs()
                 echo 'checkout process'
 
-                git 'https://github.com/devopspractise-25/maven-demo.git'    
+                git branch: 'dev-jenkins', url: 'https://github.com/devopspractise-25/maven-demo.git'
+                sh 'ls -l'     
             }
 
             
