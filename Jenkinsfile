@@ -52,6 +52,7 @@ pipeline {
         stage ('Docker Build'){
             steps {
                 script {
+                    sh 'ls -lrth'
                     def customImage = docker.build(DOCKER_IMAGE_NAME, '.')
                     echo "Built Docker image: ${customImage.id}"
                 }
