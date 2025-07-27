@@ -23,7 +23,7 @@ pipeline {
         }
         stage ('SonarQube Scan'){
             steps{
-                withSonarQubeEnv(installationName: 'sonar' credentialsId: 'admin_sonar') {
+                withSonarQubeEnv(installationName: 'sonar', credentialsId: 'admin_sonar') {
                     sh """
                         sonar-scanner \\
                         -Dsonar.projectKey=hello-world-war \\
