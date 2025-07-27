@@ -46,12 +46,12 @@ pipeline {
         stage ('Nexus Upload'){
             steps{
                 echo "Uploading artifact to nexus repository"
-                //nexusArtifactUploader credentialsId: 'nexus-jenkins', groupId: 'com.efsavage', nexusUrl: '34.174.105.234:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: '1.1.4'
-                withCredentials([usernamePassword(credentialsId: env.NEXUS_CREDENTIAL_ID, passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
+                nexusArtifactUploader artifacts: [[artifactId: 'hello-world-war-1.1.4', classifier: '', file: 'target/hello-world-war-1.1.4.war', type: 'war']], credentialsId: 'nexus-jenkins', groupId: 'com.efsavage', nexusUrl: '34.174.105.234:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: '1.1.4'
+                //withCredentials([usernamePassword(credentialsId: env.NEXUS_CREDENTIAL_ID, passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
                     // This uses mvn deploy. Ensure your pom.xml has <distributionManagement> configured
                     // Or you can use -DaltDeploymentRepository as shown below (replace placeholders)
-                    sh "mvn deploy -DskipTests -DaltDeploymentRepository=nexus-releases::default::${env.NEXUS_REPO_URL} -DrepositoryId=nexus-releases"
-                }
+                    //sh "mvn deploy -DskipTests -DaltDeploymentRepository=nexus-releases::default::${env.NEXUS_REPO_URL} -DrepositoryId=nexus-releases"
+                //}
             }
         }
     }
